@@ -2,9 +2,9 @@
 // Copyright (C) 2023 Anthony <https://github.com/aholinch>
 // See end of file for extended copyright information.
 
-#include <stdio.h>
-#include <math.h>
 #include "SGP4.h"
+#include <math.h>
+#include <stdio.h>
 
 /*     ----------------------------------------------------------------
  *
@@ -45,21 +45,13 @@
  *              20 apr 07  david vallado
  *                           misc fixes for constants
  *              11 aug 06  david vallado
- *                           chg lyddane choice back to strn3, constants, misc doc
- *              15 dec 05  david vallado
- *                           misc fixes
- *              26 jul 05  david vallado
- *                           fixes for paper
- *                           note that each fix is preceded by a
- *                           comment with "sgp4fix" and an explanation of
- *                           what was changed
- *              10 aug 04  david vallado
- *                           2nd printing baseline working
- *              14 may 01  david vallado
- *                           2nd edition baseline
- *                     80  norad
+ *                           chg lyddane choice back to strn3, constants, misc
+ * doc 15 dec 05  david vallado misc fixes 26 jul 05  david vallado fixes for
+ * paper note that each fix is preceded by a comment with "sgp4fix" and an
+ * explanation of what was changed 10 aug 04  david vallado 2nd printing
+ * baseline working 14 may 01  david vallado 2nd edition baseline 80  norad
  *                           original baseline
- *       ----------------------------------------------------------------      */
+ *       ---------------------------------------------------------------- */
 
 /* -----------------------------------------------------------------------------
 *
@@ -128,24 +120,15 @@
 *    vallado, crawford, hujsak, kelso  2006
 ----------------------------------------------------------------------------*/
 
-void dpper(
-    double e3, double ee2, double peo, double pgho, double pho,
-    double pinco, double plo, double se2, double se3, double sgh2,
-    double sgh3, double sgh4, double sh2, double sh3, double si2,
-    double si3, double sl2, double sl3, double sl4, double t,
-    double xgh2, double xgh3, double xgh4, double xh2, double xh3,
-    double xi2, double xi3, double xl2, double xl3, double xl4,
-    double zmol, double zmos,
-    char init,
-    ElsetRec *rec,
-    char opsmode)
+void dpper(double e3, double ee2, double peo, double pgho, double pho, double pinco, double plo, double se2, double se3,
+           double sgh2, double sgh3, double sgh4, double sh2, double sh3, double si2, double si3, double sl2,
+           double sl3, double sl4, double t, double xgh2, double xgh3, double xgh4, double xh2, double xh3, double xi2,
+           double xi3, double xl2, double xl3, double xl4, double zmol, double zmos, char init, ElsetRec *rec,
+           char opsmode)
 {
     /* --------------------- local variables ------------------------ */
-    double alfdp, betdp, cosip, cosop, dalf, dbet, dls,
-        f2, f3, pe, pgh, ph, pinc, pl,
-        sel, ses, sghl, sghs, shll, shs, sil,
-        sinip, sinop, sinzf, sis, sll, sls, xls,
-        xnoh, zf, zm, zel, zes, znl, zns;
+    double alfdp, betdp, cosip, cosop, dalf, dbet, dls, f2, f3, pe, pgh, ph, pinc, pl, sel, ses, sghl, sghs, shll, shs,
+        sil, sinip, sinop, sinzf, sis, sll, sls, xls, xnoh, zf, zm, zel, zes, znl, zns;
 
     /* ---------------------- constants ----------------------------- */
     zns = 1.19459e-5;
@@ -326,10 +309,7 @@ void dpper(
 *    vallado, crawford, hujsak, kelso  2006
 ----------------------------------------------------------------------------*/
 
-void dscom(
-    double epoch, double ep, double argpp, double tc, double inclp,
-    double nodep, double np,
-    ElsetRec *rec)
+void dscom(double epoch, double ep, double argpp, double tc, double inclp, double nodep, double np, ElsetRec *rec)
 {
     /* -------------------------- constants ------------------------- */
     const double zes = 0.01675;
@@ -343,12 +323,8 @@ void dscom(
 
     /* --------------------- local variables ------------------------ */
     int lsflg;
-    double a1, a2, a3, a4, a5, a6, a7,
-        a8, a9, a10, betasq, cc, ctem, stem,
-        x1, x2, x3, x4, x5, x6, x7,
-        x8, xnodce, xnoi, zcosg, zcosgl, zcosh, zcoshl,
-        zcosi, zcosil, zsing, zsingl, zsinh, zsinhl, zsini,
-        zsinil, zx, zy;
+    double a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, betasq, cc, ctem, stem, x1, x2, x3, x4, x5, x6, x7, x8, xnodce,
+        xnoi, zcosg, zcosgl, zcosh, zcoshl, zcosi, zcosil, zsing, zsingl, zsinh, zsinhl, zsini, zsinil, zx, zy;
 
     rec->nm = np;
     rec->em = ep;
@@ -423,12 +399,10 @@ void dscom(
         rec->z2 = 6.0 * (a1 * a3 + a2 * a4) + rec->z32 * rec->emsq;
         rec->z3 = 3.0 * (a3 * a3 + a4 * a4) + rec->z33 * rec->emsq;
         rec->z11 = -6.0 * a1 * a5 + rec->emsq * (-24.0 * x1 * x7 - 6.0 * x3 * x5);
-        rec->z12 = -6.0 * (a1 * a6 + a3 * a5) + rec->emsq *
-                                                    (-24.0 * (x2 * x7 + x1 * x8) - 6.0 * (x3 * x6 + x4 * x5));
+        rec->z12 = -6.0 * (a1 * a6 + a3 * a5) + rec->emsq * (-24.0 * (x2 * x7 + x1 * x8) - 6.0 * (x3 * x6 + x4 * x5));
         rec->z13 = -6.0 * a3 * a6 + rec->emsq * (-24.0 * x2 * x8 - 6.0 * x4 * x6);
         rec->z21 = 6.0 * a2 * a5 + rec->emsq * (24.0 * x1 * x5 - 6.0 * x3 * x7);
-        rec->z22 = 6.0 * (a4 * a5 + a2 * a6) + rec->emsq *
-                                                   (24.0 * (x2 * x5 + x1 * x6) - 6.0 * (x4 * x7 + x3 * x8));
+        rec->z22 = 6.0 * (a4 * a5 + a2 * a6) + rec->emsq * (24.0 * (x2 * x5 + x1 * x6) - 6.0 * (x4 * x7 + x3 * x8));
         rec->z23 = 6.0 * a4 * a6 + rec->emsq * (24.0 * x2 * x6 - 6.0 * x4 * x8);
         rec->z1 = rec->z1 + rec->z1 + betasq * rec->z31;
         rec->z2 = rec->z2 + rec->z2 + betasq * rec->z32;
@@ -587,19 +561,13 @@ void dscom(
 *    vallado, crawford, hujsak, kelso  2006
 ----------------------------------------------------------------------------*/
 
-void dsinit(
-    double tc, double xpidot,
-    ElsetRec *rec)
+void dsinit(double tc, double xpidot, ElsetRec *rec)
 {
     /* --------------------- local variables ------------------------ */
 
-    double ainv2, aonv = 0.0, cosisq, eoc, f220, f221, f311,
-                  f321, f322, f330, f441, f442, f522, f523,
-                  f542, f543, g200, g201, g211, g300, g310,
-                  g322, g410, g422, g520, g521, g532, g533,
-                  ses, sgs, sghl, sghs, shs, shll, sis,
-                  sini2, sls, temp, temp1, theta, xno2, q22,
-                  q31, q33, root22, root44, root54, rptim, root32,
+    double ainv2, aonv = 0.0, cosisq, eoc, f220, f221, f311, f321, f322, f330, f441, f442, f522, f523, f542, f543, g200,
+                  g201, g211, g300, g310, g322, g410, g422, g520, g521, g532, g533, ses, sgs, sghl, sghs, shs, shll,
+                  sis, sini2, sls, temp, temp1, theta, xno2, q22, q31, q33, root22, root44, root54, rptim, root32,
                   root52, x2o3, znl, emo, zns, emsqo;
 
     q22 = 1.7891679e-6;
@@ -617,7 +585,8 @@ void dsinit(
 
     // sgp4fix identify constants and allow alternate values
     // just xke is used here so pass it in rather than have multiple calls
-    // getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
+    // getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2
+    // );
 
     /* -------------------- deep space initialization ------------ */
     rec->irez = 0;
@@ -730,10 +699,15 @@ void dsinit(
             f322 = -1.875 * rec->sinim * (1.0 + 2.0 * rec->cosim - 3.0 * cosisq);
             f441 = 35.0 * sini2 * f220;
             f442 = 39.3750 * sini2 * sini2;
-            f522 = 9.84375 * rec->sinim * (sini2 * (1.0 - 2.0 * rec->cosim - 5.0 * cosisq) + 0.33333333 * (-2.0 + 4.0 * rec->cosim + 6.0 * cosisq));
-            f523 = rec->sinim * (4.92187512 * sini2 * (-2.0 - 4.0 * rec->cosim + 10.0 * cosisq) + 6.56250012 * (1.0 + 2.0 * rec->cosim - 3.0 * cosisq));
-            f542 = 29.53125 * rec->sinim * (2.0 - 8.0 * rec->cosim + cosisq * (-12.0 + 8.0 * rec->cosim + 10.0 * cosisq));
-            f543 = 29.53125 * rec->sinim * (-2.0 - 8.0 * rec->cosim + cosisq * (12.0 + 8.0 * rec->cosim - 10.0 * cosisq));
+            f522 = 9.84375 * rec->sinim *
+                   (sini2 * (1.0 - 2.0 * rec->cosim - 5.0 * cosisq) +
+                    0.33333333 * (-2.0 + 4.0 * rec->cosim + 6.0 * cosisq));
+            f523 = rec->sinim * (4.92187512 * sini2 * (-2.0 - 4.0 * rec->cosim + 10.0 * cosisq) +
+                                 6.56250012 * (1.0 + 2.0 * rec->cosim - 3.0 * cosisq));
+            f542 =
+                29.53125 * rec->sinim * (2.0 - 8.0 * rec->cosim + cosisq * (-12.0 + 8.0 * rec->cosim + 10.0 * cosisq));
+            f543 =
+                29.53125 * rec->sinim * (-2.0 - 8.0 * rec->cosim + cosisq * (12.0 + 8.0 * rec->cosim - 10.0 * cosisq));
             xno2 = rec->nm * rec->nm;
             ainv2 = aonv * aonv;
             temp1 = 3.0 * xno2 * ainv2;
@@ -864,8 +838,8 @@ void dsinit(
 void dspace(double tc, ElsetRec *rec)
 {
     int iretn;
-    double delt, ft, theta, x2li, x2omi, xl, xldot, xnddt, xndt, xomi, g22, g32,
-        g44, g52, g54, fasx2, fasx4, fasx6, rptim, step2, stepn, stepp;
+    double delt, ft, theta, x2li, x2omi, xl, xldot, xnddt, xndt, xomi, g22, g32, g44, g52, g54, fasx2, fasx4, fasx6,
+        rptim, step2, stepn, stepp;
 
     xndt = 0;
     xnddt = 0;
@@ -907,7 +881,8 @@ void dspace(double tc, ElsetRec *rec)
     /* ------------------------- epoch restart ----------------------  */
     //   sgp4fix for propagator problems
     //   the following integration works for negative time steps and periods
-    //   the specific changes are unknown because the original code was so convoluted
+    //   the specific changes are unknown because the original code was so
+    //   convoluted
 
     // sgp4fix take out atime = 0.0 and fix for faster operation
     ft = 0.0;
@@ -936,8 +911,7 @@ void dspace(double tc, ElsetRec *rec)
                 xndt = rec->del1 * sin(rec->xli - fasx2) + rec->del2 * sin(2.0 * (rec->xli - fasx4)) +
                        rec->del3 * sin(3.0 * (rec->xli - fasx6));
                 xldot = rec->xni + rec->xfact;
-                xnddt = rec->del1 * cos(rec->xli - fasx2) +
-                        2.0 * rec->del2 * cos(2.0 * (rec->xli - fasx4)) +
+                xnddt = rec->del1 * cos(rec->xli - fasx2) + 2.0 * rec->del2 * cos(2.0 * (rec->xli - fasx4)) +
                         3.0 * rec->del3 * cos(3.0 * (rec->xli - fasx6));
                 xnddt = xnddt * xldot;
             }
@@ -956,9 +930,8 @@ void dspace(double tc, ElsetRec *rec)
                 xnddt = rec->d2201 * cos(x2omi + rec->xli - g22) + rec->d2211 * cos(rec->xli - g22) +
                         rec->d3210 * cos(xomi + rec->xli - g32) + rec->d3222 * cos(-xomi + rec->xli - g32) +
                         rec->d5220 * cos(xomi + rec->xli - g52) + rec->d5232 * cos(-xomi + rec->xli - g52) +
-                        2.0 * (rec->d4410 * cos(x2omi + x2li - g44) +
-                               rec->d4422 * cos(x2li - g44) + rec->d5421 * cos(xomi + x2li - g54) +
-                               rec->d5433 * cos(-xomi + x2li - g54));
+                        2.0 * (rec->d4410 * cos(x2omi + x2li - g44) + rec->d4422 * cos(x2li - g44) +
+                               rec->d5421 * cos(xomi + x2li - g54) + rec->d5433 * cos(-xomi + x2li - g54));
                 xnddt = xnddt * xldot;
             }
 
@@ -1064,7 +1037,8 @@ void initl(double epoch, ElsetRec *rec)
     /* ----------------------- earth constants ---------------------- */
     // sgp4fix identify constants and allow alternate values
     // only xke and j2 are used here so pass them in directly
-    // getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
+    // getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2
+    // );
     x2o3 = 2.0 / 3.0;
 
     /* ------------- calculate auxillary epoch quantities ---------- */
@@ -1200,12 +1174,8 @@ bool sgp4init(char opsmode, ElsetRec *satrec)
 {
     /* --------------------- local variables ------------------------ */
 
-    double cc1sq,
-        cc2, cc3, coef, coef1, cosio4,
-        eeta, etasq, perige, pinvsq, psisq, qzms24,
-        sfour, tc, temp, temp1, temp2, temp3, tsi, xpidot,
-        xhdot1, qzms2t, ss, x2o3, r[3], v[3],
-        delmotemp, qzms2ttemp, qzms24temp;
+    double cc1sq, cc2, cc3, coef, coef1, cosio4, eeta, etasq, perige, pinvsq, psisq, qzms24, sfour, tc, temp, temp1,
+        temp2, temp3, tsi, xpidot, xhdot1, qzms2t, ss, x2o3, r[3], v[3], delmotemp, qzms2ttemp, qzms24temp;
 
     double epoch = (satrec->jdsatepoch + satrec->jdsatepochF) - 2433281.5;
 
@@ -1317,7 +1287,8 @@ bool sgp4init(char opsmode, ElsetRec *satrec)
 
     /* ------------------------ earth constants ----------------------- */
     // sgp4fix identify constants and allow alternate values no longer needed
-    // getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
+    // getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2
+    // );
     ss = 78.0 / satrec->radiusearthkm + 1.0;
     // sgp4fix use multiply for speed instead of pow
     qzms2ttemp = (120.0 - 78.0) / satrec->radiusearthkm;
@@ -1373,26 +1344,33 @@ bool sgp4init(char opsmode, ElsetRec *satrec)
         psisq = fabs(1.0 - etasq);
         coef = qzms24 * pow(tsi, 4.0);
         coef1 = coef / pow(psisq, 3.5);
-        cc2 = coef1 * satrec->no_unkozai * (satrec->ao * (1.0 + 1.5 * etasq + eeta * (4.0 + etasq)) + 0.375 * satrec->j2 * tsi / psisq * satrec->con41 * (8.0 + 3.0 * etasq * (8.0 + etasq)));
+        cc2 = coef1 * satrec->no_unkozai *
+              (satrec->ao * (1.0 + 1.5 * etasq + eeta * (4.0 + etasq)) +
+               0.375 * satrec->j2 * tsi / psisq * satrec->con41 * (8.0 + 3.0 * etasq * (8.0 + etasq)));
         satrec->cc1 = satrec->bstar * cc2;
         cc3 = 0.0;
         if (satrec->ecco > 1.0e-4)
             cc3 = -2.0 * coef * tsi * satrec->j3oj2 * satrec->no_unkozai * satrec->sinio / satrec->ecco;
         satrec->x1mth2 = 1.0 - satrec->cosio2;
         satrec->cc4 = 2.0 * satrec->no_unkozai * coef1 * satrec->ao * satrec->omeosq *
-                      (satrec->eta * (2.0 + 0.5 * etasq) + satrec->ecco * (0.5 + 2.0 * etasq) - satrec->j2 * tsi / (satrec->ao * psisq) * (-3.0 * satrec->con41 * (1.0 - 2.0 * eeta + etasq * (1.5 - 0.5 * eeta)) + 0.75 * satrec->x1mth2 * (2.0 * etasq - eeta * (1.0 + etasq)) * cos(2.0 * satrec->argpo)));
+                      (satrec->eta * (2.0 + 0.5 * etasq) + satrec->ecco * (0.5 + 2.0 * etasq) -
+                       satrec->j2 * tsi / (satrec->ao * psisq) *
+                           (-3.0 * satrec->con41 * (1.0 - 2.0 * eeta + etasq * (1.5 - 0.5 * eeta)) +
+                            0.75 * satrec->x1mth2 * (2.0 * etasq - eeta * (1.0 + etasq)) * cos(2.0 * satrec->argpo)));
         satrec->cc5 = 2.0 * coef1 * satrec->ao * satrec->omeosq * (1.0 + 2.75 * (etasq + eeta) + eeta * etasq);
         cosio4 = satrec->cosio2 * satrec->cosio2;
         temp1 = 1.5 * satrec->j2 * pinvsq * satrec->no_unkozai;
         temp2 = 0.5 * temp1 * satrec->j2 * pinvsq;
         temp3 = -0.46875 * satrec->j4 * pinvsq * pinvsq * satrec->no_unkozai;
-        satrec->mdot = satrec->no_unkozai + 0.5 * temp1 * satrec->rteosq * satrec->con41 + 0.0625 * temp2 * satrec->rteosq * (13.0 - 78.0 * satrec->cosio2 + 137.0 * cosio4);
-        satrec->argpdot = -0.5 * temp1 * satrec->con42 + 0.0625 * temp2 * (7.0 - 114.0 * satrec->cosio2 + 395.0 * cosio4) +
+        satrec->mdot = satrec->no_unkozai + 0.5 * temp1 * satrec->rteosq * satrec->con41 +
+                       0.0625 * temp2 * satrec->rteosq * (13.0 - 78.0 * satrec->cosio2 + 137.0 * cosio4);
+        satrec->argpdot = -0.5 * temp1 * satrec->con42 +
+                          0.0625 * temp2 * (7.0 - 114.0 * satrec->cosio2 + 395.0 * cosio4) +
                           temp3 * (3.0 - 36.0 * satrec->cosio2 + 49.0 * cosio4);
         xhdot1 = -temp1 * satrec->cosio;
-        satrec->nodedot = xhdot1 + (0.5 * temp2 * (4.0 - 19.0 * satrec->cosio2) +
-                                    2.0 * temp3 * (3.0 - 7.0 * satrec->cosio2)) *
-                                       satrec->cosio;
+        satrec->nodedot =
+            xhdot1 +
+            (0.5 * temp2 * (4.0 - 19.0 * satrec->cosio2) + 2.0 * temp3 * (3.0 - 7.0 * satrec->cosio2)) * satrec->cosio;
         xpidot = satrec->argpdot + satrec->nodedot;
         satrec->omgcof = satrec->bstar * cc3 * cos(satrec->argpo);
         satrec->xmcof = 0.0;
@@ -1428,15 +1406,11 @@ bool sgp4init(char opsmode, ElsetRec *satrec)
             satrec->argpp = satrec->argpo;
             satrec->mp = satrec->mo;
 
-            dpper(satrec->e3, satrec->ee2, satrec->peo, satrec->pgho,
-                  satrec->pho, satrec->pinco, satrec->plo, satrec->se2,
-                  satrec->se3, satrec->sgh2, satrec->sgh3, satrec->sgh4,
-                  satrec->sh2, satrec->sh3, satrec->si2, satrec->si3,
-                  satrec->sl2, satrec->sl3, satrec->sl4, satrec->t,
-                  satrec->xgh2, satrec->xgh3, satrec->xgh4, satrec->xh2,
-                  satrec->xh3, satrec->xi2, satrec->xi3, satrec->xl2,
-                  satrec->xl3, satrec->xl4, satrec->zmol, satrec->zmos, satrec->init, satrec,
-                  satrec->operationmode);
+            dpper(satrec->e3, satrec->ee2, satrec->peo, satrec->pgho, satrec->pho, satrec->pinco, satrec->plo,
+                  satrec->se2, satrec->se3, satrec->sgh2, satrec->sgh3, satrec->sgh4, satrec->sh2, satrec->sh3,
+                  satrec->si2, satrec->si3, satrec->sl2, satrec->sl3, satrec->sl4, satrec->t, satrec->xgh2,
+                  satrec->xgh3, satrec->xgh4, satrec->xh2, satrec->xh3, satrec->xi2, satrec->xi3, satrec->xl2,
+                  satrec->xl3, satrec->xl4, satrec->zmol, satrec->zmos, satrec->init, satrec, satrec->operationmode);
 
             satrec->ecco = satrec->ep;
             satrec->inclo = satrec->inclp;
@@ -1460,17 +1434,15 @@ bool sgp4init(char opsmode, ElsetRec *satrec)
             satrec->d3 = (17.0 * satrec->ao + sfour) * temp;
             satrec->d4 = 0.5 * temp * satrec->ao * tsi * (221.0 * satrec->ao + 31.0 * sfour) * satrec->cc1;
             satrec->t3cof = satrec->d2 + 2.0 * cc1sq;
-            satrec->t4cof = 0.25 * (3.0 * satrec->d3 + satrec->cc1 *
-                                                           (12.0 * satrec->d2 + 10.0 * cc1sq));
-            satrec->t5cof = 0.2 * (3.0 * satrec->d4 +
-                                   12.0 * satrec->cc1 * satrec->d3 +
-                                   6.0 * satrec->d2 * satrec->d2 +
+            satrec->t4cof = 0.25 * (3.0 * satrec->d3 + satrec->cc1 * (12.0 * satrec->d2 + 10.0 * cc1sq));
+            satrec->t5cof = 0.2 * (3.0 * satrec->d4 + 12.0 * satrec->cc1 * satrec->d3 + 6.0 * satrec->d2 * satrec->d2 +
                                    15.0 * cc1sq * (2.0 * satrec->d2 + cc1sq));
         }
     } // if omeosq = 0 ...
 
     /* finally propogate to zero epoch to initialize all others. */
-    // sgp4fix take out check to let satellites process until they are actually below earth surface
+    // sgp4fix take out check to let satellites process until they are actually
+    // below earth surface
     //       if(satrec->error == 0)
 
     sgp4(satrec, 0.0, r, v);
@@ -1568,23 +1540,13 @@ bool sgp4init(char opsmode, ElsetRec *satrec)
 *    vallado, crawford, hujsak, kelso  2006
 ----------------------------------------------------------------------------*/
 
-bool sgp4(
-    ElsetRec *satrec, double tsince,
-    double *r, double *v)
+bool sgp4(ElsetRec *satrec, double tsince, double *r, double *v)
 {
 
-    double axnl, aynl, betal, cnod,
-        cos2u, coseo1, cosi, cosip, cosisq, cossu, cosu,
-        delm, delomg, ecose, el2, eo1,
-        esine, argpdf, pl, mrt = 0.0,
-                           mvt, rdotl, rl, rvdot, rvdotl,
-                           sin2u, sineo1, sini, sinip, sinsu, sinu,
-                           snod, su, t2, t3, t4, tem5, temp,
-                           temp1, temp2, tempa, tempe, templ, u, ux,
-                           uy, uz, vx, vy, vz,
-                           xinc, xincp, xl, xlm,
-                           xmdf, xmx, xmy, nodedf, xnode, tc,
-                           x2o3, vkmpersec, delmtemp;
+    double axnl, aynl, betal, cnod, cos2u, coseo1, cosi, cosip, cosisq, cossu, cosu, delm, delomg, ecose, el2, eo1,
+        esine, argpdf, pl, mrt = 0.0, mvt, rdotl, rl, rvdot, rvdotl, sin2u, sineo1, sini, sinip, sinsu, sinu, snod, su,
+                           t2, t3, t4, tem5, temp, temp1, temp2, tempa, tempe, templ, u, ux, uy, uz, vx, vy, vz, xinc,
+                           xincp, xl, xlm, xmdf, xmx, xmy, nodedf, xnode, tc, x2o3, vkmpersec, delmtemp;
 
     int ktr;
 
@@ -1595,7 +1557,8 @@ bool sgp4(
     const double temp4 = 1.5e-12;
     x2o3 = 2.0 / 3.0;
     // sgp4fix identify constants and allow alternate values
-    // getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2 );
+    // getgravconst( whichconst, tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2
+    // );
     vkmpersec = satrec->radiusearthkm * satrec->xke / 60.0;
 
     /* --------------------- clear sgp4 error flag ----------------- */
@@ -1627,16 +1590,13 @@ bool sgp4(
         delomg = satrec->omgcof * satrec->t;
         // sgp4fix use mutliply for speed instead of pow
         delmtemp = 1.0 + satrec->eta * cos(xmdf);
-        delm = satrec->xmcof *
-               (delmtemp * delmtemp * delmtemp -
-                satrec->delmo);
+        delm = satrec->xmcof * (delmtemp * delmtemp * delmtemp - satrec->delmo);
         temp = delomg + delm;
         satrec->mm = xmdf + temp;
         satrec->argpm = argpdf - temp;
         t3 = t2 * satrec->t;
         t4 = t3 * satrec->t;
-        tempa = tempa - satrec->d2 * t2 - satrec->d3 * t3 -
-                satrec->d4 * t4;
+        tempa = tempa - satrec->d2 * t2 - satrec->d3 * t3 - satrec->d4 * t4;
         tempe = tempe + satrec->bstar * satrec->cc5 * (sin(satrec->mm) - satrec->sinmao);
         templ = templ + satrec->t3cof * t3 + t4 * (satrec->t4cof + satrec->t * satrec->t5cof);
     }
@@ -1707,14 +1667,10 @@ bool sgp4(
     cosip = satrec->cosim;
     if (satrec->method == 'd')
     {
-        dpper(satrec->e3, satrec->ee2, satrec->peo, satrec->pgho,
-              satrec->pho, satrec->pinco, satrec->plo, satrec->se2,
-              satrec->se3, satrec->sgh2, satrec->sgh3, satrec->sgh4,
-              satrec->sh2, satrec->sh3, satrec->si2, satrec->si3,
-              satrec->sl2, satrec->sl3, satrec->sl4, satrec->t,
-              satrec->xgh2, satrec->xgh3, satrec->xgh4, satrec->xh2,
-              satrec->xh3, satrec->xi2, satrec->xi3, satrec->xl2,
-              satrec->xl3, satrec->xl4, satrec->zmol, satrec->zmos,
+        dpper(satrec->e3, satrec->ee2, satrec->peo, satrec->pgho, satrec->pho, satrec->pinco, satrec->plo, satrec->se2,
+              satrec->se3, satrec->sgh2, satrec->sgh3, satrec->sgh4, satrec->sh2, satrec->sh3, satrec->si2, satrec->si3,
+              satrec->sl2, satrec->sl3, satrec->sl4, satrec->t, satrec->xgh2, satrec->xgh3, satrec->xgh4, satrec->xh2,
+              satrec->xh3, satrec->xi2, satrec->xi3, satrec->xl2, satrec->xl3, satrec->xl4, satrec->zmol, satrec->zmos,
               'n', satrec, satrec->operationmode);
 
         xincp = satrec->inclp;
@@ -1805,8 +1761,7 @@ bool sgp4(
             satrec->x1mth2 = 1.0 - cosisq;
             satrec->x7thm1 = 7.0 * cosisq - 1.0;
         }
-        mrt = rl * (1.0 - 1.5 * temp2 * betal * satrec->con41) +
-              0.5 * temp1 * satrec->x1mth2 * cos2u;
+        mrt = rl * (1.0 - 1.5 * temp2 * betal * satrec->con41) + 0.5 * temp1 * satrec->x1mth2 * cos2u;
         su = su - 0.25 * temp2 * satrec->x7thm1 * sin2u;
         xnode = satrec->nodep + 1.5 * temp2 * cosip * sin2u;
         xinc = xincp + 1.5 * temp2 * cosip * sinip * cos2u;
@@ -1852,7 +1807,8 @@ bool sgp4(
 *
 *                           function getgravconst
 *
-*  this function gets constants for the propagator. note that mu is identified to
+*  this function gets constants for the propagator. note that mu is identified
+to
 *    facilitiate comparisons with newer models. the common useage is wgs72.
 *
 *  author        : david vallado                  719-573-2600   21 jul 2006
@@ -1945,16 +1901,17 @@ void getgravconst(int whichconst, ElsetRec *rec)
  *
  *  references    :
  *    vallado       2013, 187, eq 3-45
- * --------------------------------------------------------------------------- */
+ * ---------------------------------------------------------------------------
+ */
 
 double gstime(double jdut1)
 {
     double temp, tut1;
 
     tut1 = (jdut1 - 2451545.0) / 36525.0;
-    temp = -6.2e-6 * tut1 * tut1 * tut1 + 0.093104 * tut1 * tut1 +
-           (876600.0 * 3600 + 8640184.812866) * tut1 + 67310.54841; // sec
-    temp = fmod(temp * deg2rad / 240.0, twopi);                     // 360/86400 = 1/240, to deg, to rad
+    temp = -6.2e-6 * tut1 * tut1 * tut1 + 0.093104 * tut1 * tut1 + (876600.0 * 3600 + 8640184.812866) * tut1 +
+           67310.54841;                         // sec
+    temp = fmod(temp * deg2rad / 240.0, twopi); // 360/86400 = 1/240, to deg, to rad
 
     // ------------------------ check quadrants ---------------------
     if (temp < 0.0)
@@ -1994,15 +1951,14 @@ double gstime(double jdut1)
  *
  *  references    :
  *    vallado       2013, 183, alg 14, ex 3-4
- * --------------------------------------------------------------------------- */
+ * ---------------------------------------------------------------------------
+ */
 
 void jday(int year, int mon, int day, int hr, int minute, double sec, double *jd, double *jdfrac)
 {
 
-    *jd = 367.0 * year -
-          floor((7 * (year + floor((mon + 9) / 12.0))) * 0.25) +
-          floor(275 * mon / 9.0) +
-          day + 1721013.5; // use - 678987.0 to go to mjd directly
+    *jd = 367.0 * year - floor((7 * (year + floor((mon + 9) / 12.0))) * 0.25) + floor(275 * mon / 9.0) + day +
+          1721013.5; // use - 678987.0 to go to mjd directly
     *jdfrac = (sec + minute * 60.0 + hr * 3600.0) / 86400.0;
 
     // check that the day and fractional day are correct
@@ -2019,14 +1975,15 @@ void jday(int year, int mon, int day, int hr, int minute, double sec, double *jd
 double eratime(double jdut1)
 {
     double d = jdut1 - 2451545.0;
-    double theta = 2.0 * M_PI *
-        (0.7790572732640 +
-         1.00273781191135448 * d);
+    double theta = 2.0 * M_PI * (0.7790572732640 + 1.00273781191135448 * d);
 
     /* normalize between 0 and 2π */
     theta = fmod(theta, 2.0 * M_PI);
+
     if (theta < 0.0)
+    {
         theta += 2.0 * M_PI;
+    }
 
     return theta;
 } // eratime
@@ -2043,8 +2000,8 @@ double eratime(double jdut1)
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,

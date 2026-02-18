@@ -73,7 +73,8 @@ typedef struct ElsetRec
     double nm;
     double t;
 
-    // sgp4fix add constant parameters to eliminate mutliple calls during execution
+    // sgp4fix add constant parameters to eliminate mutliple calls during
+    // execution
     double tumin;
     double mu;
     double radiusearthkm;
@@ -90,7 +91,8 @@ typedef struct ElsetRec
     char not_orbital;  // "Orbiting S/C" flag (0=n, 1=y)
     double rcs_m2;     // "RCS (m^2)" storage
 
-    // temporary variables because the original authors call the same method with different variables
+    // temporary variables because the original authors call the same method with
+    // different variables
     double ep;
     double inclp;
     double nodep;
@@ -247,17 +249,13 @@ typedef struct ElsetRec
     double sinio;
 } ElsetRec; // end struct
 
-void dpper(double e3, double ee2, double peo, double pgho, double pho,
-           double pinco, double plo, double se2, double se3, double sgh2,
-           double sgh3, double sgh4, double sh2, double sh3, double si2,
-           double si3, double sl2, double sl3, double sl4, double t,
-           double xgh2, double xgh3, double xgh4, double xh2, double xh3,
-           double xi2, double xi3, double xl2, double xl3, double xl4,
-           double zmol, double zmos, char init,
-           ElsetRec *rec, char opsmode);
+void dpper(double e3, double ee2, double peo, double pgho, double pho, double pinco, double plo, double se2, double se3,
+           double sgh2, double sgh3, double sgh4, double sh2, double sh3, double si2, double si3, double sl2,
+           double sl3, double sl4, double t, double xgh2, double xgh3, double xgh4, double xh2, double xh3, double xi2,
+           double xi3, double xl2, double xl3, double xl4, double zmol, double zmos, char init, ElsetRec *rec,
+           char opsmode);
 
-void dscom(double epoch, double ep, double argpp, double tc, double inclp,
-           double nodep, double np, ElsetRec *rec);
+void dscom(double epoch, double ep, double argpp, double tc, double inclp, double nodep, double np, ElsetRec *rec);
 
 void dsinit(double tc, double xpidot, ElsetRec *rec);
 

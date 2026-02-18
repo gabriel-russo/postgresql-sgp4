@@ -2,13 +2,13 @@
 // Copyright (C) 2023 Anthony <https://github.com/aholinch>
 // See end of file for extended copyright information.
 
-#include <stdio.h>
-#include <math.h>
-#include <string.h>
-#include <stdlib.h>
-#include <time.h>
 #include "TLE.h"
 #include "SGP4.h"
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
 // parse the double
 static double gd(char *str, int ind1, int ind2);
@@ -30,8 +30,9 @@ void parseLines(TLE *tle, char *line1, char *line2)
 
     //          1         2         3         4         5         6
     // 0123456789012345678901234567890123456789012345678901234567890123456789
-    // line1="1 00005U 58002B   00179.78495062  .00000023  00000-0  28098-4 0  4753";
-    // line2="2 00005  34.2682 348.7242 1859667 331.7664  19.3264 10.82419157413667";
+    // line1="1 00005U 58002B   00179.78495062  .00000023  00000-0  28098-4 0
+    // 4753"; line2="2 00005  34.2682 348.7242 1859667
+    // 331.7664  19.3264 10.82419157413667";
 
     // intlid
     strncpy(tle->intlid, &line1[9], 8);
@@ -240,8 +241,7 @@ void setValsToRec(TLE *tle, ElsetRec *rec)
  *
 /* --------------------------------------------------------------------- */
 
-Position satellite_geographic_position(
-    char line1[], char line2[], char at[])
+Position satellite_geographic_position(char line1[], char line2[], char at[])
 {
     TLE tle;
     Position pos;
@@ -268,9 +268,7 @@ long isoToMillis(char *iso)
     memset(&t, 0, sizeof(struct tm));
 
     double sec;
-    sscanf(iso, "%d-%d-%dT%d:%d:%lf",
-           &t.tm_year, &t.tm_mon, &t.tm_mday,
-           &t.tm_hour, &t.tm_min, &sec);
+    sscanf(iso, "%d-%d-%dT%d:%d:%lf", &t.tm_year, &t.tm_mon, &t.tm_mday, &t.tm_hour, &t.tm_min, &sec);
 
     t.tm_year -= 1900;
     t.tm_mon -= 1;
@@ -278,25 +276,17 @@ long isoToMillis(char *iso)
 
     time_t seconds = timegm(&t);
 
-    return seconds * 1000L +
-           (long)((sec - t.tm_sec) * 1000.0);
+    return seconds * 1000L + (long)((sec - t.tm_sec) * 1000.0);
 }
 
-void temeToGeodetic(double r[3], long millis,
-                    double *lat, double *lon, double *alt)
+void temeToGeodetic(double r[3], long millis, double *lat, double *lon, double *alt)
 {
     double jd, jdfrac;
 
     time_t seconds = millis / 1000;
     struct tm *ptm = gmtime(&seconds);
 
-    jday(ptm->tm_year + 1900,
-         ptm->tm_mon + 1,
-         ptm->tm_mday,
-         ptm->tm_hour,
-         ptm->tm_min,
-         ptm->tm_sec,
-         &jd, &jdfrac);
+    jday(ptm->tm_year + 1900, ptm->tm_mon + 1, ptm->tm_mday, ptm->tm_hour, ptm->tm_min, ptm->tm_sec, &jd, &jdfrac);
 
     double gmst = eratime(jd + jdfrac);
 
@@ -317,8 +307,7 @@ void temeToGeodetic(double r[3], long millis,
     {
         N = WGS84_A / sqrt(1 - WGS84_E2 * sin(phi) * sin(phi));
         h = rxy / cos(phi) - N;
-        double newphi =
-            atan2(z, rxy * (1 - WGS84_E2 * N / (N + h)));
+        double newphi = atan2(z, rxy * (1 - WGS84_E2 * N / (N + h)));
         delta = fabs(newphi - phi);
         phi = newphi;
     }
@@ -326,7 +315,6 @@ void temeToGeodetic(double r[3], long millis,
     *lat = phi;
     *alt = h;
 }
-
 
 // MIT License
 //
@@ -340,8 +328,8 @@ void temeToGeodetic(double r[3], long millis,
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,

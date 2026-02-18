@@ -1,12 +1,36 @@
-# postgresql_sgp4
+# postgresql-sgp4
 
-`postgresql_sgp4` is a PostgreSQL extension that embeds an SGP4 orbital propagator directly inside the database engine, allowing satellite position computation from TLE data using pure SQL.
+PostgreSQL SGP4 is a PostgreSQL extension that embeds an SGP4 orbital propagator directly inside the database engine, allowing satellite position computation from TLE data using pure SQL.
 
 The extension itself is installed in PostgreSQL under the name `sgp4`.
 
 ```sql
 CREATE EXTENSION sgp4;
 ```
+
+## Usage
+
+Function: `satellite_geographic_position`
+
+Parameters:
+- line1 VARCHAR,
+- line2 VARCHAR,
+- at_datetime TIMESTAMP WITHOUT TIME ZONE
+
+Example:
+
+```sql
+SELECT
+    satellite_geographic_position(
+        '1 44883U 19093E   26042.94689667  .00001181  00000+0  15674-3 0  9994', 
+        '2 44883  97.7645 114.1422 0001434 192.3199 167.7980 14.81620074332535', 
+        NOW() AT TIME ZONE 'UTC'
+) AS position;
+```
+
+| Position  (text)                                  |
+|---------------------------------------------------|
+| POINT Z(113.5396674273 -59.9937262414 646.952589) |
 
 ## Overview
 
