@@ -1,13 +1,13 @@
 // Copyright (C) 2026 Gabriel Russo
 // See end of file for extended copyright information.
 
-#include "TLE.h"
+#include "postgres.h"
+#include "fmgr.h"
+#include "utils/builtins.h"
 #include "catalog/pg_type.h"
 #include "datatype/timestamp.h"
-#include "fmgr.h"
-#include "postgres.h"
-#include "utils/builtins.h"
 #include "utils/timestamp.h"
+#include "TLE.h"
 
 /*
  * SGP4_satellite_geographic_position computes the geographic position of a
